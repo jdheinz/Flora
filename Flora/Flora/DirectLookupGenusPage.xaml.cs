@@ -51,11 +51,7 @@ namespace Flora
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            //genusPlusFamily.Clear();
-            //genusList.Clear();
-            //familyList.Clear();
             scientificNameList.Clear();
-            //hasImageList.Clear();
         }
     }
 }

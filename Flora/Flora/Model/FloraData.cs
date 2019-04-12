@@ -14,11 +14,7 @@ namespace Flora.Model
     public class FloraData
     {
 
-        public class StringData
-        {
-            public string familyName { get; set; }
-            public string genusName { get; set; }
-        }
+        
         HttpClient client = new HttpClient();
         string[] data;
         public async Task<string[]> GetData()
@@ -69,7 +65,7 @@ namespace Flora.Model
 
         public async Task<List<string>> WebScraper(string taxonid)
         {
-            //string uri = "http://midwestherbaria.org/portal/taxa/index.php?taxauthid=1&taxon="+taxonid+"&clid=";
+            
             int i = 0;
             var html = await client.GetStringAsync(@"http://midwestherbaria.org/portal/taxa/index.php?taxauthid=1&taxon=" + taxonid + "&clid=");
             var htmlDoc = new HtmlDocument();
@@ -99,40 +95,6 @@ namespace Flora.Model
 
             return imageURIs;
         }
-        /*
-        public async Task<List<string>> GetImage(string scientificName)
-        {
-            string uri = "https://search.idigbio.org/v2/search/media?fields=[%22accessuri%22]&rq={\"scientificname\":\"" + scientificName + "\"}&no_attribution=true&limit=1";
-            Debug.WriteLine("IMAGE: uri string is: " + uri);
-            HttpClient client = new HttpClient();
-            try
-            {
-                var response = await client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("IMAGE: status 200***IsASuccess!");
-                    string content = await response.Content.ReadAsStringAsync();
-                    PlantQuery.RootObject dynObj = Newtonsoft.Json.JsonConvert.DeserializeObject<PlantQuery.RootObject>(content);
-                    Debug.WriteLine("IMAGE: deserialization completed...");
-                    //imageURIs = new string[dynObj.itemCount];
-                    Debug.WriteLine("IMAGE: itemCount is " + dynObj.itemCount);
-                    //int i = 0;
-                    foreach (var data1 in dynObj.items)
-                    {
-                        Debug.WriteLine("IMAGE: foreach loop iteration");
-                        Debug.WriteLine("accessURI is: " + data1.indexTerms.accessuri);
-                        imageURIs.Add(data1.indexTerms.accessuri);
-                        Debug.WriteLine("data[i] newest addition is " + imageURIs.Last());
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error retrieving Json data: " + e);
-            }
-            return imageURIs;
-        }//GetImage end"
-        */
 
     }//FloraData end
 }//namespace end

@@ -74,9 +74,6 @@ namespace Flora
             base.OnDisappearing();
             genusPlusFamily.Clear();
             genusList.Clear();
-            //familyList.Clear();
-            //scientificNameList.Clear();
-            //hasImageList.Clear();
         }
     }
 }
